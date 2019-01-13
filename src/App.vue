@@ -9,10 +9,10 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
 
-            Selected Channel: #{{selectedChannel}}
+            Channel: #{{selectedChannel}}
 
-            <v-btn @click.native="dialog = true">
-                Cloud Options
+            <v-btn @click.native="dialog = true" color="info">
+                Options
             </v-btn>
         </v-toolbar>
 
@@ -108,14 +108,14 @@
 
                     <v-layout>
                         <v-flex xs12
-                                md6><v-switch :label="filtertime ? `Filter recent words` : `Use all words`" v-model="filtertime"></v-switch></v-flex>
+                                md6><v-switch :label="`Filter by time`" v-model="filtertime"></v-switch></v-flex>
 
                         <v-flex xs12
                                 md6>
                         <v-text-field v-if="filtertime"
                                       v-model="lastseconds"
                                       class="mt-0"
-                                      label="Recently said in Seconds"
+                                      label="Show words since X seconds ago"
                                       type="number"
                         ></v-text-field>
                         </v-flex>
