@@ -121,11 +121,6 @@
                         </v-flex>
                     </v-layout>
 
-                    <div v-if="channelStats.loaded">
-                        Total Words: {{channelStats.totalWords}}
-                        Total Emotes: {{channelStats.totalEmotes}}
-                    </div>
-
                 </v-card-text>
 
 
@@ -219,6 +214,17 @@
     watch: {
       selectedChannel: function (val) {
         this.getChannelStats()
+      },
+      filtertime:function(val){
+        this.convertWordMap()
+      },
+
+      lastseconds:function(val){
+    this.convertWordMap()
+  },
+
+      selectedType: function(val){
+        this.convertWordMap()
       }
     },
     methods: {
@@ -283,8 +289,6 @@
 
         this.channelStats.loaded = true
 
-        console.log(this.channelStats)
-
         this.convertWordMap()
       },
       convertWordMap () {
@@ -297,8 +301,8 @@
 
         var result = keys.filter(function(key){
           let lastupdated = _this.wordMap.wordMap[_this.selectedChannel]['word'][key]['d']
-          if(this.filtertime) {
-            return (ts - lastupdated) < (this.lastseconds)
+          if(_this.filtertime) {
+            return (ts - lastupdated) < (_this.lastseconds)
           }else{
             return true
           }
@@ -321,12 +325,6 @@
             return -1
           return 0
         })
-
-        //this.defaultWords = result
-
-        console.log('Number of words to display: ' + result.length + ' OC: ' + originalcount)
-
-        console.log(result)
 
         this.awaitingResult = result.slice(0, 100)
 

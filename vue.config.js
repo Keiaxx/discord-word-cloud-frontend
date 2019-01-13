@@ -1,5 +1,5 @@
 module.exports = {
-  devServer: {
-    proxy: 'http://ub1.gose.pw'
-  }
+  baseUrl: process.env.NODE_ENV === 'production'
+    ? '/discord-word-cloud-frontend/'
+    : '/'
 }
